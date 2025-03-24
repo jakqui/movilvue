@@ -1,0 +1,25 @@
+Paso 1: Generar el archivo Keystore
+keytool -genkeypair -v -keystore my-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -storepass miContrasena123 -keypass miContrasena123 -dname "CN=Jakqui Herrera, OU=Desarrollador, O=hh, L=Ciudad, ST=Estado, C=MX"
+
+Paso 2: Subir el keystore a GitHub como Secreto
+    Codificar el archivo keystore en base64: Para subir el archivo como un secreto en GitHub, primero debes convertirlo a base64. Usa el siguiente comando en tu terminal:
+        base64 my-release-key.jks > keystore-base64.txt
+
+
+a. Convierte .jks a .p12 con keytool.
+keytool -importkeystore -srckeystore my-release-key.jks -destkeystore my-release-key.p12 -deststoretype PKCS12
+
+b. Convierte .p12 a .pem con OpenSSL.
+openssl pkcs12 -in my-release-key.p12 -out my-release-key.pem -nodes
+
+
+c. Convierte .pem a base64 con OpenSSL.
+openssl base64 -in my-release-key.pem -out keystore-base64.txt
+
+
+d. Sube el archivo base64 a GitHub como un secreto.
+
+ANDROID_KEYSTORE----base64
+ANDROID_KEYSTORE_PASSWORD---miContrasena123
+ANDROID_KEY_ALIAS---mykey
+ANDROID_KEY_PASSWORD---miContrasena123
