@@ -23,3 +23,6 @@ ANDROID_KEYSTORE----base64
 ANDROID_KEYSTORE_PASSWORD---miContrasena123
 ANDROID_KEY_ALIAS---mykey
 ANDROID_KEY_PASSWORD---miContrasena123
+
+
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\Users\Jakqueline Herrera\Desktop\Personal\git\movil\movil01\certificados\my-release-key.jks"))
